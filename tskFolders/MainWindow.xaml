@@ -1,0 +1,114 @@
+﻿<Window x:Class="MyShortcuts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyShortcuts"
+        mc:Ignorable="d"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Icon="/MyShortcuts;component/Imagens/folder.png" ShowInTaskbar="True" WindowStartupLocation="Manual"
+        Title="MyShortcuts" Height="500" Width="400" AllowDrop="True" 
+        ResizeMode="CanMinimize" Topmost="False" Closing="MainWindow_OnClosing">
+
+    <Border BorderThickness="2" BorderBrush="{StaticResource pretoClaro}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="{StaticResource cinzaClaro}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="1" Source="/MyShortcuts;component/Imagens/folder.png" Height="40"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Margin="5" BorderBrush="{StaticResource cinzaClaro}" BorderThickness="0,0,0,1.5" Background="Transparent" VerticalAlignment="Center" Height="35">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="/MyShortcuts;component/Imagens/search.png" Margin="5" Height="25"/>
+                    <TextBox Grid.Column="1" x:Name="txtSearch" BorderThickness="0" VerticalAlignment="Center" Margin="5" TextChanged="setFilter"/>
+                    <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource btnSquare}" Click="clk_clearSearch" x:Name="btnClearSearch" Visibility="Collapsed" Margin="5"/>
+                </Grid>
+            </Border>
+
+            <ListView Grid.Row="2" x:Name="lstv_atalhos" DragDrop.Drop="setDropShortcuts" Style="{StaticResource lstvItems}">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="ListViewItem.MouseDoubleClick" Handler="clk_openShortcut" />
+                    </Style>
+                </ListView.Resources>
+                <x:Type TypeName="DependencyObject"/>
+                <x:Type TypeName="Visual"/>
+                <x:Type TypeName="UIElement"/>
+                <x:Type TypeName="FrameworkElement"/>
+                <x:Type TypeName="Control"/>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add new File" Click="clk_addFile">
+                            <MenuItem.Icon>
+                                <Image Source="Imagens/file2.png" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Add new Folder" Click="clk_addFolder">
+                            <MenuItem.Icon>
+                                <Image Source="Imagens/folder2.png" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Remove selected items" Click="clk_remover">
+                            <MenuItem.Icon>
+                                <Image Source="Imagens/delete_red.png" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Save" Click="clk_save">
+                            <MenuItem.Icon>
+                                <Image Source="Imagens/save_color.png" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+
+            <Button Margin="10" Grid.Row="3" x:Name="btnOptions" HorizontalAlignment="Left" Background="{StaticResource cinzaEscuro}" Style="{StaticResource btnRound}" Click="clk_showOptions" ToolTip="Options">
+                <Image Source="Imagens/menu.png" Margin="8"/>
+            </Button>
+            <Popup AllowsTransparency="True" IsOpen="False" x:Name="popOptions" StaysOpen="False" Placement="Top" PlacementTarget="{Binding ElementName=btnOptions}" PopupAnimation="Fade">
+                <Border BorderBrush="LightGray" BorderThickness="1" Background="{StaticResource cinzaClaro}" CornerRadius="10">
+                    <StackPanel HorizontalAlignment="Left" Margin="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Margin="5,0" Background="{StaticResource vermelho}" Style="{StaticResource btnRound}" Click="clk_remover" ToolTip="Remove">
+                                <Image Source="Imagens/remove.png" Margin="8.5"/>
+                            </Button>
+                            <Button Margin="5,0" Background="{StaticResource verde}" Style="{StaticResource btnRound}" MouseRightButtonUp="clk_changeType" PreviewMouseLeftButtonUp="clk_add">
+                                <Image Source="{Binding addImg}" Margin="8.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Button.ToolTip>
+                                    <TextBlock>
+                                        Add
+                                        <LineBreak/>  
+                                        Right-click to change search type
+                                    </TextBlock>
+                                </Button.ToolTip>
+                            </Button>
+                        </StackPanel>
+                        <Rectangle Margin="5,10" Fill="{StaticResource cinzaEscuro}" Height="2"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Margin="5,0" Background="{StaticResource azul}" Style="{StaticResource btnRound}" Click="clk_sair" ToolTip="Exit">
+                                <Image Source="Imagens/turnoff.png" Margin="6"/>
+                            </Button>
+                            <Button Margin="5,0" Background="{StaticResource amarelo}" Style="{StaticResource btnRound}" Click="clk_save" ToolTip="Save">
+                                <Image Source="Imagens/save.png" Margin="10"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Popup>
+        </Grid>
+    </Border>
+</Window>
