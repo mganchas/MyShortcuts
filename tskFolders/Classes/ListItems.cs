@@ -10,5 +10,6 @@ namespace MyShortcuts.Classes
         public double nivel { get; set; }
         public Visibility error { get; set; }
         public ImageSource image { get; set; }
+        public string imagePath { get; set; }
     }
 }

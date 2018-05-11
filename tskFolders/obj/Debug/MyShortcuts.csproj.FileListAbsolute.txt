@@ -57,3 +57,24 @@ C:\Users\michael.ganchas\Desktop\Michael\Projectos\MyShortcuts\tskFolders\obj\De
 C:\Users\michael.ganchas\Desktop\Michael\Projectos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.GenerateResource.Cache
 C:\Users\michael.ganchas\Desktop\Michael\Projectos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe.manifest
 C:\Users\michael.ganchas\Desktop\Michael\Projectos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.application
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe.config
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe.manifest
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.application
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.pdb
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csprojResolveAssemblyReference.cache
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MainWindow.g.cs
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\App.g.cs
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts_MarkupCompile.cache
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts_MarkupCompile.lref
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\App.baml
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\Elementos WPF\EstilosWPF.baml
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MainWindow.baml
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.g.resources
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.Properties.Resources.resources
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.GenerateResource.cache
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.CoreCompileInputs.cache
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe.manifest
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.application
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe
+C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.pdb

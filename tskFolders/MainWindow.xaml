@@ -67,11 +67,11 @@
                                 <Image Source="Imagens/delete_red.png" Height="15" Width="15"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Save" Click="clk_save">
+                        <!--<MenuItem Header="Save" Click="clk_save">
                             <MenuItem.Icon>
                                 <Image Source="Imagens/save_color.png" Height="15" Width="15"/>
                             </MenuItem.Icon>
-                        </MenuItem>
+                        </MenuItem>-->
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>
@@ -97,7 +97,7 @@
                                 </Button.ToolTip>
                             </Button>
                         </StackPanel>
-                        <Rectangle Margin="5,10" Fill="{StaticResource cinzaEscuro}" Height="2"/>
+                        <!--<Rectangle Margin="5,10" Fill="{StaticResource cinzaEscuro}" Height="2"/>
                         <StackPanel Orientation="Horizontal">
                             <Button Margin="5,0" Background="{StaticResource azul}" Style="{StaticResource btnRound}" Click="clk_sair" ToolTip="Exit">
                                 <Image Source="Imagens/turnoff.png" Margin="6"/>
@@ -105,7 +105,7 @@
                             <Button Margin="5,0" Background="{StaticResource amarelo}" Style="{StaticResource btnRound}" Click="clk_save" ToolTip="Save">
                                 <Image Source="Imagens/save.png" Margin="10"/>
                             </Button>
-                        </StackPanel>
+                        </StackPanel>-->
                     </StackPanel>
                 </Border>
             </Popup>

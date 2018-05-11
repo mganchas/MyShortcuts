@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shell;
 using MyShortcuts.Classes;
 
 namespace MyShortcuts
@@ -24,12 +26,38 @@ namespace MyShortcuts
         public MainWindow()
         {
             InitializeComponent();
-            setInitConditions();
+            SetInitConditions();
+            BuildJumpList();
         }
         #endregion
 
         #region Methods
-        private void setInitConditions()
+        private void BuildJumpList()
+        {
+            List<JumpItem> customCat = new List<JumpItem>();
+
+            if (lstv_atalhos.Items.Count > 0)
+            {
+                foreach (ListItems listItem in lstv_atalhos.Items)
+                {
+                    JumpTask jumpItem = new JumpTask()
+                    {
+                        ApplicationPath = listItem.path,
+                        IconResourcePath = listItem.imagePath,
+                        Title = listItem.title,
+                        Description = listItem.title,
+                        CustomCategory = "Shortcuts"
+                    };
+                    customCat.Add(jumpItem);
+                }
+            }
+
+            JumpList jumpList = new JumpList();// customCat, true, true);
+            jumpList.JumpItems.AddRange(customCat);
+            JumpList.SetJumpList(App.Current, jumpList);
+        }
+
+        private void SetInitConditions()
         {
             this.DataContext = xImg;
             lstv_atalhos.Items.Clear();
@@ -78,11 +106,13 @@ namespace MyShortcuts
                 {
                     title = Name ?? Definitions.getShortcutName(xCaminho),
                     image = Definitions.getImageSource(xCaminho),
+                    imagePath = xCaminho,
                     path = xCaminho.ToString(),
                     error = Visibility.Collapsed,
                     nivel = 1.0
                 });
             }
+            saveItems();
         }
 
         private void addItemsListV(string[] lstCaminhos)
@@ -142,6 +172,7 @@ namespace MyShortcuts
                 removeItems();
                 break;
             }
+            saveItems();
             lstv_atalhos.Items.Refresh();
         }
 
