@@ -78,3 +78,23 @@ C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts
 C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.application
 C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe
 C:\Users\Michael\Documents\Projetos\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.pdb
+D:\MyShortcuts\tskFolders\obj\Debug\MainWindow.g.cs
+D:\MyShortcuts\tskFolders\obj\Debug\App.g.cs
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts_MarkupCompile.cache
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts_MarkupCompile.lref
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.pdb
+D:\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe.config
+D:\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe.manifest
+D:\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.application
+D:\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.exe
+D:\MyShortcuts\tskFolders\bin\Debug\MyShortcuts.pdb
+D:\MyShortcuts\tskFolders\obj\Debug\App.baml
+D:\MyShortcuts\tskFolders\obj\Debug\Elementos WPF\EstilosWPF.baml
+D:\MyShortcuts\tskFolders\obj\Debug\MainWindow.baml
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.g.resources
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.Properties.Resources.resources
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.GenerateResource.cache
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.CoreCompileInputs.cache
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe.manifest
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.application

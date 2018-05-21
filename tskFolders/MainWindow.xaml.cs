@@ -62,9 +62,9 @@ namespace MyShortcuts
             this.DataContext = xImg;
             lstv_atalhos.Items.Clear();
 
-            setImgSource(Definitions.AddTypes.File);
+            SetImgSource(Definitions.AddTypes.File);
             Folders.folderChecking();
-            dStructToListItem(new Saver().readFile());
+            dStructToListItem(new Saver().ReadFile());
 
             txtSearch.Focus();
 
@@ -74,7 +74,7 @@ namespace MyShortcuts
         private void dStructToListItem(List<Definitions.DataStruct> structList)
         {
             foreach (Definitions.DataStruct structure in structList)
-                loopThroughItems(structure.value, structure.name);
+                LoopThroughItems(structure.value, structure.name);
         }
 
         private void setDropShortcuts(object sender, DragEventArgs e)
@@ -87,7 +87,7 @@ namespace MyShortcuts
                 MessageBox.Show("Sorry! Type not supported");
         }
 
-        private bool isDuplicateItem(string path)
+        private bool IsDuplicateItem(string path)
         {
             if (lstv_atalhos.Items.Count > 0)
             {
@@ -98,9 +98,9 @@ namespace MyShortcuts
             return false;
         }
 
-        private void loopThroughItems(string xCaminho, string Name)
+        private void LoopThroughItems(string xCaminho, string Name, bool saveItems = false)
         {
-            if (!isDuplicateItem(xCaminho))
+            if (!IsDuplicateItem(xCaminho))
             {
                 lstv_atalhos.Items.Add(new ListItems()
                 {
@@ -112,18 +112,22 @@ namespace MyShortcuts
                     nivel = 1.0
                 });
             }
-            saveItems();
+
+            if (saveItems) {
+                SaveItems();
+            }
         }
 
         private void addItemsListV(string[] lstCaminhos)
         {
-            foreach (string xCaminho in lstCaminhos)
-                loopThroughItems(xCaminho, null);
+            foreach (string xCaminho in lstCaminhos) { 
+                LoopThroughItems(xCaminho, null, true);
+            }
         }
 
         private void setAppPosition(object sender, RoutedEventArgs e)
         {
-            var areaTrab = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
+            //var areaTrab = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
             //this.Left = 0; //areaTrab.Right - this.Width * 2;
             //this.Top = areaTrab.Bottom - areaTrab.Top;
         }
@@ -147,7 +151,7 @@ namespace MyShortcuts
             btnClearSearch.Visibility = String.IsNullOrEmpty(xTxt.Text) ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        private void addFiles()
+        private void AddFiles()
         {
             System.Windows.Forms.OpenFileDialog xDialog = new System.Windows.Forms.OpenFileDialog();
             xDialog.Multiselect = true;
@@ -156,7 +160,7 @@ namespace MyShortcuts
                 addItemsListV(xDialog.FileNames);
         }
 
-        private void addFolders()
+        private void AddFolders()
         {
             System.Windows.Forms.FolderBrowserDialog xDialog = new System.Windows.Forms.FolderBrowserDialog();
 
@@ -164,38 +168,38 @@ namespace MyShortcuts
                 addItemsListV(new string[] { xDialog.SelectedPath.ToString() });
         }
 
-        private void removeItems()
+        private void RemoveItems()
         {
             foreach (ListItems xItem in lstv_atalhos.SelectedItems)
             {
                 lstv_atalhos.Items.Remove(xItem);
-                removeItems();
-                break;
+                RemoveItems();
+                //break;
             }
-            saveItems();
+            SaveItems();
             lstv_atalhos.Items.Refresh();
         }
 
-        private void setImgSource(Definitions.AddTypes type)
+        private void SetImgSource(Definitions.AddTypes type)
         {
             if (type == Definitions.AddTypes.File)
             {
-                xImg.addImg = strToImgConverter("/MyShortcuts;component/Imagens/file_add.png");
+                xImg.addImg = StrToImgConverter("/MyShortcuts;component/Imagens/file_add.png");
                 fType = Definitions.AddTypes.File;
             }
             else
             {
                 fType = Definitions.AddTypes.Folder;
-                xImg.addImg = strToImgConverter("/MyShortcuts;component/Imagens/folder_add.png");
+                xImg.addImg = StrToImgConverter("/MyShortcuts;component/Imagens/folder_add.png");
             }
         }
 
-        private ImageSource strToImgConverter(string path)
+        private ImageSource StrToImgConverter(string path)
         {
             return new BitmapImage(new Uri(path, UriKind.Relative));
         }
 
-        private bool shortcutStatus(ListItems oListItem)
+        private bool ShortcutStatus(ListItems oListItem)
         {
             bool exists = false;
 
@@ -213,15 +217,12 @@ namespace MyShortcuts
             return exists;
         }
        
-        private void saveItems()
+        private void SaveItems()
         {
             List<Definitions.DataStruct> dStruct = new List<Definitions.DataStruct>();
 
             foreach (ListItems listItem in lstv_atalhos.Items)
             {
-                var xxx = (lstv_atalhos.Items[lstv_atalhos.Items.IndexOf(listItem)] as ListViewItem);
-                
-
                 dStruct.Add(new Definitions.DataStruct()
                 {
                     type = (Definitions.Types)Definitions.getTypeFromString(Definitions.getShortcutType(listItem.path)),
@@ -230,20 +231,21 @@ namespace MyShortcuts
                 });
             }
 
-            new Saver().writeFile(dStruct, false);
+            Saver.WriteFile(dStruct, false);
+            BuildJumpList();
         }
         #endregion
 
         #region Controls' Events
         private void clk_sair(object sender, RoutedEventArgs e)
         {
-            //saveItems();
+            SaveItems();
             this.Close();
         }
 
         private void clk_remover(object sender, RoutedEventArgs e)
         {
-            removeItems();
+            RemoveItems();
         }
 
         private void clk_minimizar(object sender, RoutedEventArgs e)
@@ -260,7 +262,7 @@ namespace MyShortcuts
         {
             ListItems oListItem = (lstv_atalhos.SelectedItem as ListItems);
 
-            if (shortcutStatus(oListItem))
+            if (ShortcutStatus(oListItem))
             {
                 Process.Start(oListItem.path);
                 oListItem.error = Visibility.Collapsed;
@@ -284,38 +286,38 @@ namespace MyShortcuts
         private void clk_changeType(object sender, MouseButtonEventArgs e)
         {
             if (fType == Definitions.AddTypes.File)
-                setImgSource(Definitions.AddTypes.Folder);
+                SetImgSource(Definitions.AddTypes.Folder);
             else
-                setImgSource(Definitions.AddTypes.File);
+                SetImgSource(Definitions.AddTypes.File);
         }
 
         private void clk_add(object sender, MouseButtonEventArgs e)
         {
             if (fType == Definitions.AddTypes.File)
-                addFiles();
+                AddFiles();
             else
-                addFolders();
+                AddFolders();
         }
        
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            saveItems();
+            SaveItems();
         }
         #endregion
 
-        private void clk_save(object sender, RoutedEventArgs e)
-        {
-            saveItems();
-        }
+        //private void clk_save(object sender, RoutedEventArgs e)
+        //{
+        //    SaveItems();
+        //}
 
         private void clk_addFile(object sender, RoutedEventArgs e)
         {
-            addFiles();
+            AddFiles();
         }
 
         private void clk_addFolder(object sender, RoutedEventArgs e)
         {
-            addFolders();
+            AddFolders();
         }
     }
 

@@ -18,35 +18,27 @@ namespace MyShortcuts.Classes
         #endregion
 
         #region Class Paramethers
-        string path;
-        List<Definitions.DataStruct> retList;
-        #endregion
-
-        #region Constructors
-        public Saver()
-        {
-            this.path = String.Format(@"{0}\{1}", Folders.getFolder(), Definitions.FILENAME);
-            retList = new List<Definitions.DataStruct>();
-        }
+        private static readonly string path = String.Format(@"{0}\{1}", Folders.getFolder(), Definitions.FILENAME);
+        private List<Definitions.DataStruct> retList = new List<Definitions.DataStruct>();
         #endregion
 
         #region Public Methods
-        public void writeFile(List<Definitions.DataStruct> values, bool append = true)
+        public static void WriteFile(List<Definitions.DataStruct> values, bool append = true)
         {
             StreamWriter sWriter = new StreamWriter(path, append);
 
             foreach (Definitions.DataStruct value in values)
-                writeCoding(ref sWriter, value);
+                WriteCoding(ref sWriter, value);
 
             sWriter.Close();
         }
 
-        public List<Definitions.DataStruct> readFile()
+        public List<Definitions.DataStruct> ReadFile()
         {
             if (Files.fileExists(path))
             {
                 StreamReader sReader = new StreamReader(path);
-                this.readLine(Regex.Split(sReader.ReadToEnd(), INIT));
+                this.ReadLine(Regex.Split(sReader.ReadToEnd(), INIT));
                 sReader.Close();
 
             }
@@ -55,22 +47,16 @@ namespace MyShortcuts.Classes
         #endregion
 
         #region Private Methods
-        private void createFile()
-        {
-            StreamWriter sWriter = new StreamWriter(path);
-            sWriter.Close();
-        }
-
-        private void readLine(string[] entries)
+        private void ReadLine(string[] entries)
         {
             foreach (string line in entries)
             {
                 if (!String.IsNullOrEmpty(line))
-                    this.readValues(Regex.Split(line, SEPARATOR));
+                    this.ReadValues(Regex.Split(line, SEPARATOR));
             }
         }
 
-        private void readValues(string[] values)
+        private void ReadValues(string[] values)
         {
             Definitions.Types sType = Definitions.Types.Drive;
             string sValue = string.Empty;
@@ -79,20 +65,20 @@ namespace MyShortcuts.Classes
             foreach (string value in values)
             {
                 if (value.IndexOf(ATTRIBUTE.Replace("x", "type").Trim()) != -1)
-                    sType = getType(value);
+                    sType = GetType(value);
 
                 else if (value.IndexOf(ATTRIBUTE.Replace("x", "value").Trim()) != -1)
-                    sValue = getValue(value);
+                    sValue = GetValue(value);
 
                 else if (value.IndexOf(ATTRIBUTE.Replace("x", "name").Trim()) != -1)
-                    sName = getValue(value);
+                    sName = GetValue(value);
             }
 
             if (!String.IsNullOrEmpty(sValue))
                 retList.Add(new Definitions.DataStruct() { type = sType, value = sValue, name = sName });
         }
 
-        private Definitions.Types getType(string value)
+        private Definitions.Types GetType(string value)
         {
             int firstIndex = value.IndexOf(VALUE.Substring(0, 2)) + 2;
             int lastIndex = value.IndexOf(VALUE.Substring(VALUE.Length - 3, 2));
@@ -100,7 +86,7 @@ namespace MyShortcuts.Classes
             return (Definitions.Types)Definitions.getTypeFromString(value.Substring(firstIndex, lastIndex - firstIndex));
         }
 
-        private string getValue(string value)
+        private string GetValue(string value)
         {
             int firstIndex = value.IndexOf(VALUE.Substring(0, 2)) + 2;
             int lastIndex = value.IndexOf(VALUE.Substring(VALUE.Length - 3, 2));
@@ -108,7 +94,7 @@ namespace MyShortcuts.Classes
             return value.Substring(firstIndex, lastIndex - firstIndex);
         }
 
-        private void writeCoding(ref StreamWriter sWriter, Definitions.DataStruct value)
+        private static void WriteCoding(ref StreamWriter sWriter, Definitions.DataStruct value)
         {
             sWriter.WriteLine(
                 INIT + 
