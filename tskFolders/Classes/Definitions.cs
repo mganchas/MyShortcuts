@@ -32,7 +32,7 @@ namespace MyShortcuts.Classes
             Drive
         }
 
-        public struct DataStruct
+        public struct EntryData
         {
             public Types type;
             public string value;

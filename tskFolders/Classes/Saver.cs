@@ -19,21 +19,21 @@ namespace MyShortcuts.Classes
 
         #region Class Paramethers
         private static readonly string path = String.Format(@"{0}\{1}", Folders.getFolder(), Definitions.FILENAME);
-        private List<Definitions.DataStruct> retList = new List<Definitions.DataStruct>();
+        private List<Definitions.EntryData> retList = new List<Definitions.EntryData>();
         #endregion
 
         #region Public Methods
-        public static void WriteFile(List<Definitions.DataStruct> values, bool append = true)
+        public static void WriteFile(List<Definitions.EntryData> values, bool append = true)
         {
             StreamWriter sWriter = new StreamWriter(path, append);
 
-            foreach (Definitions.DataStruct value in values)
+            foreach (Definitions.EntryData value in values)
                 WriteCoding(ref sWriter, value);
 
             sWriter.Close();
         }
 
-        public List<Definitions.DataStruct> ReadFile()
+        public List<Definitions.EntryData> ReadFile()
         {
             if (Files.fileExists(path))
             {
@@ -75,7 +75,7 @@ namespace MyShortcuts.Classes
             }
 
             if (!String.IsNullOrEmpty(sValue))
-                retList.Add(new Definitions.DataStruct() { type = sType, value = sValue, name = sName });
+                retList.Add(new Definitions.EntryData() { type = sType, value = sValue, name = sName });
         }
 
         private Definitions.Types GetType(string value)
@@ -94,7 +94,7 @@ namespace MyShortcuts.Classes
             return value.Substring(firstIndex, lastIndex - firstIndex);
         }
 
-        private static void WriteCoding(ref StreamWriter sWriter, Definitions.DataStruct value)
+        private static void WriteCoding(ref StreamWriter sWriter, Definitions.EntryData value)
         {
             sWriter.WriteLine(
                 INIT + 

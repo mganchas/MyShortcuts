@@ -98,3 +98,4 @@ D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.GenerateResource.cache
 D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csproj.CoreCompileInputs.cache
 D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.exe.manifest
 D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.application
+D:\MyShortcuts\tskFolders\obj\Debug\MyShortcuts.csprojAssemblyReference.cache

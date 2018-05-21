@@ -44,8 +44,8 @@ namespace MyShortcuts
                     {
                         ApplicationPath = listItem.path,
                         IconResourcePath = listItem.imagePath,
-                        Title = listItem.title,
-                        Description = listItem.title,
+                        Title = listItem.Title,
+                        Description = listItem.Title,
                         CustomCategory = "Shortcuts"
                     };
                     customCat.Add(jumpItem);
@@ -71,9 +71,9 @@ namespace MyShortcuts
             this.Loaded += new RoutedEventHandler(setAppPosition);
         }
 
-        private void dStructToListItem(List<Definitions.DataStruct> structList)
+        private void dStructToListItem(List<Definitions.EntryData> structList)
         {
-            foreach (Definitions.DataStruct structure in structList)
+            foreach (Definitions.EntryData structure in structList)
                 LoopThroughItems(structure.value, structure.name);
         }
 
@@ -104,7 +104,7 @@ namespace MyShortcuts
             {
                 lstv_atalhos.Items.Add(new ListItems()
                 {
-                    title = Name ?? Definitions.getShortcutName(xCaminho),
+                    Title = Name ?? Definitions.getShortcutName(xCaminho),
                     image = Definitions.getImageSource(xCaminho),
                     imagePath = xCaminho,
                     path = xCaminho.ToString(),
@@ -144,7 +144,7 @@ namespace MyShortcuts
                 xView.Filter = x =>
                 {
                     var xItems = x as ListItems;
-                    return (bool)xItems.title.ToUpper().Contains(xTxt.Text.ToUpper());
+                    return xItems.Title.ToUpper().Contains(xTxt.Text.ToUpper());
                 };
             }
 
@@ -219,15 +219,15 @@ namespace MyShortcuts
        
         private void SaveItems()
         {
-            List<Definitions.DataStruct> dStruct = new List<Definitions.DataStruct>();
+            List<Definitions.EntryData> dStruct = new List<Definitions.EntryData>();
 
             foreach (ListItems listItem in lstv_atalhos.Items)
             {
-                dStruct.Add(new Definitions.DataStruct()
+                dStruct.Add(new Definitions.EntryData()
                 {
                     type = (Definitions.Types)Definitions.getTypeFromString(Definitions.getShortcutType(listItem.path)),
                     value = listItem.path,
-                    name = listItem.title
+                    name = listItem.Title
                 });
             }
 
@@ -237,12 +237,6 @@ namespace MyShortcuts
         #endregion
 
         #region Controls' Events
-        private void clk_sair(object sender, RoutedEventArgs e)
-        {
-            SaveItems();
-            this.Close();
-        }
-
         private void clk_remover(object sender, RoutedEventArgs e)
         {
             RemoveItems();
@@ -304,12 +298,7 @@ namespace MyShortcuts
             SaveItems();
         }
         #endregion
-
-        //private void clk_save(object sender, RoutedEventArgs e)
-        //{
-        //    SaveItems();
-        //}
-
+        
         private void clk_addFile(object sender, RoutedEventArgs e)
         {
             AddFiles();
@@ -328,15 +317,14 @@ namespace MyShortcuts
         public ImageSource addImg
         {
             get { return _addImg; }
-            set { _addImg = value; OnPropertyChanged("addImg"); }
+            set { _addImg = value; OnPropertyChanged(nameof(addImg)); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string PropertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
     }
 }
