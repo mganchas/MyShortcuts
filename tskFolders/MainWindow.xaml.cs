@@ -170,11 +170,12 @@ namespace MyShortcuts
 
         private void RemoveItems()
         {
-            foreach (ListItems xItem in lstv_atalhos.SelectedItems)
+            while (lstv_atalhos.SelectedItems.Count > 0)
             {
+                ListItems xItem = lstv_atalhos.SelectedItems[0] as ListItems;
                 lstv_atalhos.Items.Remove(xItem);
-                RemoveItems();
             }
+            
             SaveItems();
             lstv_atalhos.Items.Refresh();
         }
