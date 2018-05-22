@@ -17,7 +17,6 @@ namespace MyShortcuts
     public partial class MainWindow : Window
     {
         #region Class paramethers
-        private List<ListViewItem> selectedItems = new List<ListViewItem>();
         private Definitions.AddTypes fType;
         private Imagem xImg = new Imagem();
         #endregion
@@ -64,25 +63,25 @@ namespace MyShortcuts
 
             SetImgSource(Definitions.AddTypes.File);
             Folders.folderChecking();
-            dStructToListItem(new Saver().ReadFile());
+            DStructToListItem(new Saver().ReadFile());
 
             txtSearch.Focus();
 
-            this.Loaded += new RoutedEventHandler(setAppPosition);
+            this.Loaded += new RoutedEventHandler(SetAppPosition);
         }
 
-        private void dStructToListItem(List<Definitions.EntryData> structList)
+        private void DStructToListItem(List<Definitions.EntryData> structList)
         {
             foreach (Definitions.EntryData structure in structList)
                 LoopThroughItems(structure.value, structure.name);
         }
 
-        private void setDropShortcuts(object sender, DragEventArgs e)
+        private void SetDropShortcuts(object sender, DragEventArgs e)
         {
             string[] lstCaminhos = (string[])e.Data.GetData(DataFormats.FileDrop);
 
             if (lstCaminhos != null)
-                addItemsListV(lstCaminhos);
+                AddItemsListV(lstCaminhos);
             else
                 MessageBox.Show("Sorry! Type not supported");
         }
@@ -118,21 +117,19 @@ namespace MyShortcuts
             }
         }
 
-        private void addItemsListV(string[] lstCaminhos)
+        private void AddItemsListV(string[] lstCaminhos)
         {
             foreach (string xCaminho in lstCaminhos) { 
                 LoopThroughItems(xCaminho, null, true);
             }
         }
 
-        private void setAppPosition(object sender, RoutedEventArgs e)
+        private void SetAppPosition(object sender, RoutedEventArgs e)
         {
-            //var areaTrab = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea;
-            //this.Left = 0; //areaTrab.Right - this.Width * 2;
-            //this.Top = areaTrab.Bottom - areaTrab.Top;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        private void setFilter(object sender, TextChangedEventArgs e)
+        private void SetFilter(object sender, TextChangedEventArgs e)
         {
             ICollectionView xView = CollectionViewSource.GetDefaultView(lstv_atalhos.Items);
             TextBox xTxt = (sender as TextBox);
@@ -156,16 +153,19 @@ namespace MyShortcuts
             System.Windows.Forms.OpenFileDialog xDialog = new System.Windows.Forms.OpenFileDialog();
             xDialog.Multiselect = true;
 
-            if (xDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                addItemsListV(xDialog.FileNames);
+            if (xDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) { 
+                AddItemsListV(xDialog.FileNames);
+            }
         }
 
         private void AddFolders()
         {
-            System.Windows.Forms.FolderBrowserDialog xDialog = new System.Windows.Forms.FolderBrowserDialog();
+            var xDialog = new System.Windows.Forms.FolderBrowserDialog();
 
             if (xDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                addItemsListV(new string[] { xDialog.SelectedPath.ToString() });
+            {
+                AddItemsListV(new string[] { xDialog.SelectedPath.ToString() });
+            }
         }
 
         private void RemoveItems()
@@ -174,7 +174,6 @@ namespace MyShortcuts
             {
                 lstv_atalhos.Items.Remove(xItem);
                 RemoveItems();
-                //break;
             }
             SaveItems();
             lstv_atalhos.Items.Refresh();

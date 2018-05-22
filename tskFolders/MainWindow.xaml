@@ -34,12 +34,12 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0" Source="/MyShortcuts;component/Imagens/search.png" Margin="5" Height="25"/>
-                    <TextBox Grid.Column="1" x:Name="txtSearch" BorderThickness="0" VerticalAlignment="Center" Margin="5" TextChanged="setFilter"/>
+                    <TextBox Grid.Column="1" x:Name="txtSearch" BorderThickness="0" VerticalAlignment="Center" Margin="5" TextChanged="SetFilter"/>
                     <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource btnSquare}" Click="clk_clearSearch" x:Name="btnClearSearch" Visibility="Collapsed" Margin="5"/>
                 </Grid>
             </Border>
 
-            <ListView Grid.Row="2" x:Name="lstv_atalhos" DragDrop.Drop="setDropShortcuts" Style="{StaticResource lstvItems}">
+            <ListView Grid.Row="2" x:Name="lstv_atalhos" DragDrop.Drop="SetDropShortcuts" Style="{StaticResource lstvItems}">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <EventSetter Event="ListViewItem.MouseDoubleClick" Handler="clk_openShortcut" />
