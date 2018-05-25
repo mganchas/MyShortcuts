@@ -6,7 +6,7 @@ namespace MyShortcuts.Classes
 {
     public class ListItems : INotifyPropertyChanged
     {
-        public string _title { get; set; }
+        private string _title;
         public string Title
         {
             get { return _title; }
