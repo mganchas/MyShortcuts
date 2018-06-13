@@ -258,7 +258,21 @@ namespace MyShortcuts
 
             if (ShortcutStatus(oListItem))
             {
-                Process.Start(oListItem.path);
+                try
+                {
+                    ProcessStartInfo proc = new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = oListItem.path,
+                        Verb = "runas"
+                    };
+                    Process.Start(proc);
+                }
+                catch (Exception)
+                {
+                    Process.Start(oListItem.path);
+                }
+
                 oListItem.error = Visibility.Collapsed;
                 oListItem.nivel = 1.0;
             }
